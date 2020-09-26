@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmailsInput class should render input field to target node 1`] = `
+<div>
+  <div
+    class="emails-input"
+  >
+    <input
+      class="emails-input__input"
+      placeholder="add email..."
+      type="text"
+    />
+  </div>
+</div>
+`;
+
+exports[`EmailsInput class should return list of all emails 1`] = `
+Array [
+  Object {
+    "email": "firstname.lastname@example.com",
+    "isValid": true,
+  },
+  Object {
+    "email": "plainaddress",
+    "isValid": false,
+  },
+  Object {
+    "email": "email@subdomain.example.com",
+    "isValid": true,
+  },
+  Object {
+    "email": "#@%^%#$@#$@#.com",
+    "isValid": false,
+  },
+  Object {
+    "email": "firstname+lastname@example.com",
+    "isValid": true,
+  },
+  Object {
+    "email": "@example.com",
+    "isValid": false,
+  },
+]
+`;
