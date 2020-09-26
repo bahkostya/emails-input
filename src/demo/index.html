@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="lib/emails-input.css" />
+    <link rel="stylesheet" href="demo/demo.css" />
+  </head>
+  <body>
+    <main class="container">
+      <div class="emails-form">
+        <div class="emails-form__body">
+          <h1 class="emails-form__heading">
+            Share
+            <span class="emails-form__heading--bold">Board name</span>
+            with others
+          </h1>
+          <!-- emails-input  -->
+          <div id="emails-input"></div>
+          <!-- emails-input end -->
+        </div>
+        <div class="emails-form__footer">
+          <button
+            type="button"
+            class="emails-form__button"
+            data-button="add-email"
+          >
+            Add email
+          </button>
+          <button
+            type="button"
+            class="emails-form__button"
+            data-button="get-emails-count"
+          >
+            Get emails count
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script src="lib/emails-input.js"></script>
+    <script src="demo/demo.js"></script>
+  </body>
+</html>
