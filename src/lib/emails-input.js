@@ -26,8 +26,43 @@ export default class EmailsInput {
     this.destroy = this.destroy.bind(this);
     this.getAll = this.getAll.bind(this);
 
-    this.createContainer();
-    this.addEventListeners();
+    this._createContainer();
+    this._addEventListeners();
+  }
+
+  // Public methods
+
+  add(emailString) {
+    if (typeof emailString !== 'string') {
+      throw new TypeError(
+        "Failed to execute 'add' on 'EmailsInput': parameter 1 is not of type 'string'"
+      );
+    }
+
+    const trimmedEmailString = emailString && emailString.trim();
+
+    if (!trimmedEmailString) {
+      return;
+    }
+
+    this.inputNode.value = null;
+
+    const isExistingEmail = this.store.some(
+      ({ email }) => email === trimmedEmailString
+    );
+
+    if (isExistingEmail) {
+      return;
+    }
+
+    const isValid = validateEmail(trimmedEmailString);
+
+    this._createChipElement(trimmedEmailString, isValid);
+    this._addToStore({ email: trimmedEmailString, isValid });
+  }
+
+  getAll() {
+    return this.store;
   }
 
   destroy() {
@@ -35,7 +70,9 @@ export default class EmailsInput {
     this.eventListeners.forEach((removeListener) => removeListener());
   }
 
-  addEventListeners() {
+  // Private methods
+
+  _addEventListeners() {
     const handleFocus = () => {
       this.inputNode.focus();
     };
@@ -72,44 +109,15 @@ export default class EmailsInput {
     ];
   }
 
-  add(emailString) {
-    if (typeof emailString !== 'string') {
-      throw new TypeError(
-        "Failed to execute 'add' on 'EmailsInput': parameter 1 is not of type 'string'"
-      );
-    }
-
-    const trimmedEmailString = emailString && emailString.trim();
-
-    if (!trimmedEmailString) {
-      return;
-    }
-
-    this.inputNode.value = null;
-
-    const isExistingEmail = this.store.some(
-      ({ email }) => email === trimmedEmailString
-    );
-
-    if (isExistingEmail) {
-      return;
-    }
-
-    const isValid = validateEmail(trimmedEmailString);
-
-    this.createChipElement(trimmedEmailString, isValid);
-    this.addToStore({ email: trimmedEmailString, isValid });
-  }
-
-  addToStore({ email, isValid }) {
+  _addToStore({ email, isValid }) {
     this.store.push({ email, isValid });
   }
 
-  removeFromStore(emailString) {
+  _removeFromStore(emailString) {
     this.store = this.store.filter(({ email }) => email !== emailString);
   }
 
-  createChipElement(emailString, isValid) {
+  _createChipElement(emailString, isValid) {
     const chipElement = document.createElement('span');
     chipElement.classList.add('chip');
     chipElement.appendChild(document.createTextNode(emailString));
@@ -129,7 +137,7 @@ export default class EmailsInput {
     const handleDelete = () => {
       chipButtonElement.removeEventListener('click', handleDelete);
       this.containerNode.removeChild(chipElement);
-      this.removeFromStore(emailString);
+      this._removeFromStore(emailString);
     };
     chipButtonElement.addEventListener('click', handleDelete);
 
@@ -142,7 +150,7 @@ export default class EmailsInput {
     this.inputNode.insertAdjacentElement('beforebegin', chipElement);
   }
 
-  createContainer() {
+  _createContainer() {
     const inputNode = document.createElement('input');
     inputNode.classList.add('emails-input__input');
     inputNode.setAttribute('type', 'text');
@@ -156,9 +164,5 @@ export default class EmailsInput {
     this.parentNode.appendChild(containerNode);
     this.containerNode = containerNode;
     this.inputNode = inputNode;
-  }
-
-  getAll() {
-    return this.store;
   }
 }
