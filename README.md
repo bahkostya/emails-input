@@ -6,7 +6,7 @@ A JavaScript library for entering and validating emails. It adds emails in a vie
 
 ## ✨Demo
 
-You can see a [live demo here]().
+You can see a [live demo here](https://bahkostya.github.io/emails-input/dist/) and a build [here](https://github.com/bahkostya/emails-input/tree/gh-pages/dist/lib).
 
 ## 🎨 Features
 
@@ -50,7 +50,10 @@ Type: `String` Default: `add email...`
 String show in a placeholder of an input.
 
 ## Public Methods
-In these examples, `emailsInput` refers to the instance which gets returned when you initialize it e.g. `const emailsInput = EmailsInput(inputContainerNode);`
+In these examples, `emailsInput` refers to the instance which gets returned when you initialize it e.g.:
+```js
+const emailsInput = EmailsInput(inputContainerNode);
+```
 
 **add**  
 Add new email to the list. Accepts 1 argument, `String`.
