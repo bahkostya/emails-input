@@ -59,6 +59,8 @@ export default class EmailsInput {
 
     this._createChipElement(trimmedEmailString, isValid);
     this._addToStore({ email: trimmedEmailString, isValid });
+
+    return { isValid };
   }
 
   getAll() {
