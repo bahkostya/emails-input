@@ -32,7 +32,7 @@ blocks.
   ```html
   <div id="emails-input"></div>
 
-  <script src="path/to/intlTelInput.js"></script>
+  <script src="path/to/emails-input.js"></script>
   <script>
     const inputContainerNode = document.querySelector('#emails-input');
     const emailsInput = EmailsInput(inputContainerNode, {
